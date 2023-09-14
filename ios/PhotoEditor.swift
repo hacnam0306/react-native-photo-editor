@@ -53,14 +53,14 @@ class PhotoEditor: NSObject, ZLEditImageControllerDelegate {
         self.reject = reject;
         
         // Stickers
-        let stickers = options["stickers"] as? [String] ?? []
-        ZLImageEditorConfiguration.default().imageStickerContainerView = StickerView(stickers: stickers)
-        
+//        let stickers = options["stickers"] as? [String] ?? []
+//        ZLImageEditorConfiguration.default().imageStickerContainerView = StickerView(stickers: stickers)
+//
         
         //Config
         ZLImageEditorConfiguration.default().editDoneBtnBgColor = UIColor(red:255/255.0, green:238/255.0, blue:101/255.0, alpha:1.0)
 
-        ZLImageEditorConfiguration.default().editImageTools = [.draw, .clip, .filter, .imageSticker, .textSticker]
+        ZLImageEditorConfiguration.default().editImageTools = [.draw, .clip, .filter, .textSticker]
         
         //Filters Lut
         do {

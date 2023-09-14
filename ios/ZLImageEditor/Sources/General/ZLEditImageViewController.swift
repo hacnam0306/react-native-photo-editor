@@ -50,7 +50,7 @@ public class ZLEditImageModel: NSObject {
     
     public let textStickers: [(state: ZLTextStickerState, index: Int)]?
     
-    public let imageStickers: [(state: ZLImageStickerState, index: Int)]?
+    // public let imageStickers: [(state: ZLImageStickerState, index: Int)]?
     
     init(drawPaths: [ZLDrawPath], mosaicPaths: [ZLMosaicPath], editRect: CGRect?, angle: CGFloat, selectRatio: ZLImageClipRatio?, selectFilter: ZLFilter, textStickers: [(state: ZLTextStickerState, index: Int)]?, imageStickers: [(state: ZLImageStickerState, index: Int)]?) {
         self.drawPaths = drawPaths
@@ -60,7 +60,7 @@ public class ZLEditImageModel: NSObject {
         self.selectRatio = selectRatio
         self.selectFilter = selectFilter
         self.textStickers = textStickers
-        self.imageStickers = imageStickers
+        // self.imageStickers = imageStickers
         super.init()
     }
     
@@ -225,9 +225,9 @@ public class ZLEditImageViewController: UIViewController {
         self.selectRatio = editModel?.selectRatio
         
         var ts = ZLImageEditorConfiguration.default().editImageTools
-        if ts.contains(.imageSticker), ZLImageEditorConfiguration.default().imageStickerContainerView == nil {
-            ts.removeAll { $0 == .imageSticker }
-        }
+        // if ts.contains(.imageSticker), ZLImageEditorConfiguration.default().imageStickerContainerView == nil {
+        //     ts.removeAll { $0 == .imageSticker }
+        // }
         self.tools = ts
         
         super.init(nibName: nil, bundle: nil)
@@ -236,20 +236,20 @@ public class ZLEditImageViewController: UIViewController {
             self.currentDrawColor = self.drawColors.first!
         }
         
-        let teStic = editModel?.textStickers ?? []
-        let imStic = editModel?.imageStickers ?? []
+        // let teStic = editModel?.textStickers ?? []
+        // // let imStic = editModel?.imageStickers ?? []
         
-        var stickers: [UIView?] = Array(repeating: nil, count: teStic.count + imStic.count)
-        teStic.forEach { (cache) in
-            let v = ZLTextStickerView(from: cache.state)
-            stickers[cache.index] = v
-        }
-        imStic.forEach { (cache) in
-            let v = ZLImageStickerView(from: cache.state)
-            stickers[cache.index] = v
-        }
+        // var stickers: [UIView?] = Array(repeating: nil, count: teStic.count + imStic.count)
+        // teStic.forEach { (cache) in
+        //     let v = ZLTextStickerView(from: cache.state)
+        //     stickers[cache.index] = v
+        // }
+        // imStic.forEach { (cache) in
+        //     let v = ZLImageStickerView(from: cache.state)
+        //     stickers[cache.index] = v
+        // }
         
-        self.stickers = stickers.compactMap { $0 }
+        // self.stickers = stickers.compactMap { $0 }
     }
     
     required init?(coder: NSCoder) {
@@ -548,16 +548,16 @@ public class ZLEditImageViewController: UIViewController {
             self.mosaicImageLayer?.mask = self.mosaicImageLayerMaskLayer
         }
         
-        if self.tools.contains(.imageSticker) {
-            ZLImageEditorConfiguration.default().imageStickerContainerView?.hideBlock = { [weak self] in
-                self?.setToolView(show: true)
-                self?.imageStickerContainerIsHidden = true
-            }
+        // if self.tools.contains(.imageSticker) {
+        //     ZLImageEditorConfiguration.default().imageStickerContainerView?.hideBlock = { [weak self] in
+        //         self?.setToolView(show: true)
+        //         self?.imageStickerContainerIsHidden = true
+        //     }
             
-            ZLImageEditorConfiguration.default().imageStickerContainerView?.selectImageBlock = { [weak self] (image) in
-                self?.addImageStickerView(image)
-            }
-        }
+        //     ZLImageEditorConfiguration.default().imageStickerContainerView?.selectImageBlock = { [weak self] (image) in
+        //         self?.addImageStickerView(image)
+        //     }
+        // }
         
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
         tapGes.delegate = self
@@ -640,11 +640,11 @@ public class ZLEditImageViewController: UIViewController {
         }
     }
     
-    func imageStickerBtnClick() {
-        ZLImageEditorConfiguration.default().imageStickerContainerView?.show(in: self.view)
-        self.setToolView(show: false)
-        self.imageStickerContainerIsHidden = false
-    }
+    // func imageStickerBtnClick() {
+    //     ZLImageEditorConfiguration.default().imageStickerContainerView?.show(in: self.view)
+    //     self.setToolView(show: false)
+    //     self.imageStickerContainerIsHidden = false
+    // }
     
     func textStickerBtnClick() {
         self.showInputTextVC { [weak self] (text, textColor, bgColor) in
@@ -1156,14 +1156,16 @@ extension ZLEditImageViewController: UICollectionViewDataSource, UICollectionVie
                 self.drawBtnClick()
             case .clip:
                 self.clipBtnClick()
-            case .imageSticker:
-                self.imageStickerBtnClick()
+            // case .imageSticker:
+                // self.imageStickerBtnClick()
             case .textSticker:
                 self.textStickerBtnClick()
             case .mosaic:
                 self.mosaicBtnClick()
             case .filter:
                 self.filterBtnClick()
+            default:
+                break
             }
         } else if collectionView == self.drawColorCollectionView {
             self.currentDrawColor = self.drawColors[indexPath.row]
