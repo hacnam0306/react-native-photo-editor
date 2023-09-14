@@ -1307,9 +1307,9 @@ class ZLEditToolCell: UICollectionViewCell {
             case .clip?:
                 self.icon.image = getImage("zl_clip")
                 self.icon.highlightedImage = getImage("zl_clip")
-            case .imageSticker?:
-                self.icon.image = getImage("zl_imageSticker")
-                self.icon.highlightedImage = getImage("zl_imageSticker")
+            // case .imageSticker?:
+            //     self.icon.image = getImage("zl_imageSticker")
+            //     self.icon.highlightedImage = getImage("zl_imageSticker")
             case .textSticker?:
                 self.icon.image = getImage("zl_textSticker")
                 self.icon.highlightedImage = getImage("zl_textSticker")
